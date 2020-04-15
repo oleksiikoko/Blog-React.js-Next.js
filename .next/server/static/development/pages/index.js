@@ -93,6 +93,39 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./core/axios.ts":
+/*!***********************!*\
+  !*** ./core/axios.ts ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = "https://simple-blog-api.crew.red";
+/* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+/***/ }),
+
+/***/ "./core/index.ts":
+/*!***********************!*\
+  !*** ./core/index.ts ***!
+  \***********************/
+/*! exports provided: axios */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./axios */ "./core/axios.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "axios", function() { return _axios__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
 /***/ "./pages/index.tsx":
 /*!*************************!*\
   !*** ./pages/index.tsx ***!
@@ -104,22 +137,63 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var utils_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! utils/api */ "./utils/api/index.ts");
 var _jsxFileName = "/home/oleksii/Documents/Programming/DevelopsTodayTestTask/pages/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const Index = () => {
+
+const Index = props => {
+  console.log(props);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4,
+      lineNumber: 10,
       columnNumber: 10
     }
   }, "Welcome to Nexit.js!");
 };
 
+Index.getInitialProps = async () => {
+  const props = await utils_api__WEBPACK_IMPORTED_MODULE_1__["postApi"].getListAllPost();
+  return props.data;
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./utils/api/index.ts":
+/*!****************************!*\
+  !*** ./utils/api/index.ts ***!
+  \****************************/
+/*! exports provided: postApi */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./utils/api/post.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postApi", function() { return _post__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+ // export { default as commentApi } from "./comment";
+
+/***/ }),
+
+/***/ "./utils/api/post.ts":
+/*!***************************!*\
+  !*** ./utils/api/post.ts ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core */ "./core/index.ts");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getListAllPost: () => core__WEBPACK_IMPORTED_MODULE_0__["axios"].get("/posts")
+});
 
 /***/ }),
 
@@ -132,6 +206,17 @@ const Index = () => {
 
 module.exports = __webpack_require__(/*! /home/oleksii/Documents/Programming/DevelopsTodayTestTask/pages/index.tsx */"./pages/index.tsx");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
