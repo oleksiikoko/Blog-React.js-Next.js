@@ -12,6 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Content-Type"] = "application/json";
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = "https://simple-blog-api.crew.red";
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
@@ -2851,12 +2852,14 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var Index = function Index(props) {
-  console.log(props);
+  console.log(props); // postApi.createPost("Privet ", "Maks)");
+  // postApi.updatePost(13, "Kak ", "Dela?");
+
   return __jsx("div", {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10,
+      lineNumber: 12,
       columnNumber: 10
     }
   }, "Welcome to Nexit.js!");
@@ -2887,11 +2890,33 @@ Index.getInitialProps = function _callee() {
 
 /***/ }),
 
+/***/ "./utils/api/comment.ts":
+/*!******************************!*\
+  !*** ./utils/api/comment.ts ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core */ "./core/index.ts");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  createComment: function createComment(post_id, body) {
+    return core__WEBPACK_IMPORTED_MODULE_0__["axios"].post("/comments", {
+      postId: post_id,
+      body: body
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./utils/api/index.ts":
 /*!****************************!*\
   !*** ./utils/api/index.ts ***!
   \****************************/
-/*! exports provided: postApi */
+/*! exports provided: postApi, commentApi */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2899,7 +2924,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./utils/api/post.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postApi", function() { return _post__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
- // export { default as commentApi } from "./comment";
+/* harmony import */ var _comment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./comment */ "./utils/api/comment.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "commentApi", function() { return _comment__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+
+
 
 /***/ }),
 
@@ -2917,6 +2946,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   getListAllPost: function getListAllPost() {
     return core__WEBPACK_IMPORTED_MODULE_0__["axios"].get("/posts");
+  },
+  getRetrievePost: function getRetrievePost(post_id) {
+    return core__WEBPACK_IMPORTED_MODULE_0__["axios"].get("/posts/".concat(post_id, "?_embed=comments"));
+  },
+  createPost: function createPost(title, body) {
+    return core__WEBPACK_IMPORTED_MODULE_0__["axios"].post("/posts", {
+      title: title,
+      body: body
+    });
+  },
+  updatePost: function updatePost(post_id, title, body) {
+    return core__WEBPACK_IMPORTED_MODULE_0__["axios"].put("/posts/".concat(post_id), {
+      title: title,
+      body: body
+    });
+  },
+  deletePost: function deletePost(post_id) {
+    return core__WEBPACK_IMPORTED_MODULE_0__["axios"]["delete"]("/posts/".concat(post_id));
   }
 });
 
