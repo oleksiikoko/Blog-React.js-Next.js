@@ -1,5 +1,5 @@
 export default interface IPost {
-  title: string;
   id: number;
-  completed: boolean;
+  title: string;
+  body: string;
 }
