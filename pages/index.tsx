@@ -1,4 +1,5 @@
 import React from "react";
+import { connect, ConnectedProps } from "react-redux";
 import { AxiosResponse } from "axios";
 
 import { postApi } from "utils/api";
@@ -13,8 +14,10 @@ const Index = (props) => {
 };
 
 Index.getInitialProps = async () => {
-  const props: AxiosResponse<IPosts> = await postApi.getListAllPost();
-  return props.data;
-};
+//   const props: AxiosResponse<IPosts> = await postApi.getListAllPost();
+//   return props.data;
+// };
+
+
 
 export default Index;
