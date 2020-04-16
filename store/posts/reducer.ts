@@ -1,20 +1,20 @@
 import {
   IPostsState,
-  CREATE_POST,
-  UPDATE_POST,
-  DELETE_POST,
+  // CREATE_POST,
+  // UPDATE_POST,
+  // DELETE_POST,
   SET_POSTS,
   IPostActionTypes,
 } from "./types";
 
 const initialState: IPostsState = {
-  posts: [],
+  posts: null,
 };
 
-export const postReducers = (
+export const postReducer = (
   state = initialState,
   action: IPostActionTypes
-) => {
+): IPostsState => {
   switch (action.type) {
     case SET_POSTS:
       return {

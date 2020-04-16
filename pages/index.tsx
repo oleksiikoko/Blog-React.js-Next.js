@@ -1,23 +1,35 @@
 import React from "react";
-import { connect, ConnectedProps } from "react-redux";
-import { AxiosResponse } from "axios";
+import { connect } from "react-redux";
+import postsActions from "store/posts/actions";
 
-import { postApi } from "utils/api";
+// import { IPosts } from "interfaces";
 
-import { IPosts } from "interfaces";
+const Index = ({ posts, fetchPosts }) => {
+  if (posts === null) {
+    fetchPosts();
+  }
+  // const { posts, fetchPosts } = props;
+  // fetchPosts();
+  console.log(posts);
 
-const Index = (props) => {
-  console.log(props);
   // postApi.createPost("Privet ", "Maks)");
   // postApi.updatePost(13, "Kak ", "Dela?");
   return <div>Welcome to Nexit.js!</div>;
 };
 
-Index.getInitialProps = async () => {
-//   const props: AxiosResponse<IPosts> = await postApi.getListAllPost();
-//   return props.data;
+// Index.getInitialProps = async ({ fetchPosts }) => {
+// const props: AxiosResponse<IPosts> = await postApi.getListAllPost();
+// return props.data;
+// dispatch
+// console.log(";lasdfkjfasd;");
+// postsActions.fetchPosts();
+// return {};
+// fetchPosts();
 // };
 
+const mapStateToProps = ({ postReducer }) => ({
+  posts: postReducer.posts,
+});
+const mapDispatchToProps = postsActions;
 
-
-export default Index;
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

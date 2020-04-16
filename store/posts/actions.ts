@@ -47,7 +47,6 @@ const Actions = {
       .getListAllPost()
       .then(({ data }) => {
         dispatch(Actions.setPosts(<IPosts>data));
-        console.log(data);
       })
       .catch((err) => console.log(err));
   },
