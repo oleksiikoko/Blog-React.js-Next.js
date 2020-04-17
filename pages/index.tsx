@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import postsActions from "store/posts/actions";
 
+import Blog from "components/Blog";
+
 // import { IPosts } from "interfaces";
 
 const Index = ({ posts, fetchPosts }) => {
@@ -10,11 +12,11 @@ const Index = ({ posts, fetchPosts }) => {
   }
   // const { posts, fetchPosts } = props;
   // fetchPosts();
-  console.log(posts);
+  // console.log(posts);
 
   // postApi.createPost("Privet ", "Maks)");
   // postApi.updatePost(13, "Kak ", "Dela?");
-  return <div>Welcome to Nexit.js!</div>;
+  return <Blog posts={posts} />;
 };
 
 // Index.getInitialProps = async ({ fetchPosts }) => {

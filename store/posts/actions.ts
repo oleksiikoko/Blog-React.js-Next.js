@@ -42,13 +42,34 @@ const Actions = {
 
   // }
 
-  fetchPosts: () => (dispatch): void => {
-    postApi
+  fetchPosts: () => (dispatch): Promise<void> => {
+    return postApi
       .getListAllPost()
       .then(({ data }) => {
         dispatch(Actions.setPosts(<IPosts>data));
+        return Promise.resolve();
       })
       .catch((err) => console.log(err));
+  },
+  fetchDeletePost: (postId) => (dispatch): Promise<void> => {
+    return postApi.deletePost(postId).then((data) => {
+      console.log("data", data);
+      dispatch(Actions.deletePost(postId));
+      return Promise.resolve();
+    });
+  },
+  fetchUpdatePost: (postId, title, body) => (dispatch): Promise<void> => {
+    return postApi.updatePost(postId, title, body).then(({ data }) => {
+      console.log("data", data);
+      dispatch(
+        Actions.updatePost({
+          id: data.id,
+          title: data.title,
+          body: data.body,
+        })
+      );
+      return Promise.resolve();
+    });
   },
 };
 

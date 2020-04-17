@@ -180,14 +180,33 @@ const store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducer
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postReducer", function() { return postReducer; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./store/posts/types.ts");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/values */ "lodash/values");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_values__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./store/posts/types.ts");
+
 
 const initialState = {
   posts: null
 };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
-    case _types__WEBPACK_IMPORTED_MODULE_0__["SET_POSTS"]:
+    case _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_POST"]:
+      return {
+        posts: lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts).map(post => {
+          if (post.id !== Number(action.payload.id)) {
+            return action.payload;
+          }
+
+          return post;
+        })
+      };
+
+    case _types__WEBPACK_IMPORTED_MODULE_1__["DELETE_POST"]:
+      return {
+        posts: lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts).filter(post => post.id !== Number(action.payload))
+      };
+
+    case _types__WEBPACK_IMPORTED_MODULE_1__["SET_POSTS"]:
       return {
         posts: action.payload
       };
@@ -228,17 +247,82 @@ const SET_POSTS = "SET_POSTS";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _posts_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./posts/reducer */ "./store/posts/reducer.ts");
+/* harmony import */ var _retrievePost_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./retrievePost/reducer */ "./store/retrievePost/reducer.ts");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _posts_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./posts/reducer */ "./store/posts/reducer.ts");
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  postReducer: _posts_reducer__WEBPACK_IMPORTED_MODULE_1__["postReducer"] // user,
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])({
+  postReducer: _posts_reducer__WEBPACK_IMPORTED_MODULE_2__["postReducer"],
+  retrievePostReducer: _retrievePost_reducer__WEBPACK_IMPORTED_MODULE_0__["retrievePostReducer"] // user,
   // match,
   // profile
 
 }));
+
+/***/ }),
+
+/***/ "./store/retrievePost/reducer.ts":
+/*!***************************************!*\
+  !*** ./store/retrievePost/reducer.ts ***!
+  \***************************************/
+/*! exports provided: retrievePostReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "retrievePostReducer", function() { return retrievePostReducer; });
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/values */ "lodash/values");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_values__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./store/retrievePost/types.ts");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const initialState = {
+  post: null
+};
+const retrievePostReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_1__["SET_RETRIEVE_POST"]:
+      return {
+        post: action.payload
+      };
+
+    case _types__WEBPACK_IMPORTED_MODULE_1__["ADD_COMMENT"]:
+      const comments = [...lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.post.comments), action.payload];
+      return {
+        post: _objectSpread({}, state.post, {
+          comments: comments
+        })
+      };
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./store/retrievePost/types.ts":
+/*!*************************************!*\
+  !*** ./store/retrievePost/types.ts ***!
+  \*************************************/
+/*! exports provided: SET_RETRIEVE_POST, ADD_COMMENT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RETRIEVE_POST", function() { return SET_RETRIEVE_POST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_COMMENT", function() { return ADD_COMMENT; });
+const SET_RETRIEVE_POST = "SET_RETRIEVE_POST";
+const ADD_COMMENT = "ADD_COMMENT";
 
 /***/ }),
 
@@ -251,6 +335,17 @@ __webpack_require__.r(__webpack_exports__);
 
 module.exports = __webpack_require__(/*! private-next-pages/_app.tsx */"./pages/_app.tsx");
 
+
+/***/ }),
+
+/***/ "lodash/values":
+/*!********************************!*\
+  !*** external "lodash/values" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash/values");
 
 /***/ }),
 
