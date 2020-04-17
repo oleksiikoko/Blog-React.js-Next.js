@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -24,6 +25,8 @@ export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
 
+  const router = useRouter();
+
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component="a" href="#">
@@ -36,7 +39,11 @@ export default function FeaturedPost(props) {
               <Typography variant="subtitle1" paragraph>
                 {post.body}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+              <Typography
+                variant="subtitle1"
+                color="primary"
+                onClick={() => router.push(`/posts/${post.id}`)}
+              >
                 Continue reading...
               </Typography>
             </CardContent>

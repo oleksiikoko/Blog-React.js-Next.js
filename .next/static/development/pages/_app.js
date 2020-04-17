@@ -8019,7 +8019,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _this = undefined,
-    _jsxFileName = "/home/oleksii/Documents/Programming/DevelopsTodayTestTask/pages/_app.tsx";
+    _jsxFileName = "/home/oleksii/Documents/Programming/develops-today-test-task1/pages/_app.tsx";
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
@@ -8281,7 +8281,7 @@ var ADD_COMMENT = "ADD_COMMENT";
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.tsx!./");
-module.exports = __webpack_require__(/*! /home/oleksii/Documents/Programming/DevelopsTodayTestTask/node_modules/next/dist/client/router.js */"./node_modules/next/dist/client/router.js");
+module.exports = __webpack_require__(/*! /home/oleksii/Documents/Programming/develops-today-test-task1/node_modules/next/dist/client/router.js */"./node_modules/next/dist/client/router.js");
 
 
 /***/ }),

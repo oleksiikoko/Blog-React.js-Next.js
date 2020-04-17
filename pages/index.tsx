@@ -3,31 +3,19 @@ import { connect } from "react-redux";
 import postsActions from "store/posts/actions";
 
 import Blog from "components/Blog";
+import { IPosts } from "interfaces";
 
-// import { IPosts } from "interfaces";
+interface IProps {
+  posts: IPosts;
+  fetchPosts: Function;
+}
 
-const Index = ({ posts, fetchPosts }) => {
+const Index: React.FC<IProps> = ({ posts, fetchPosts }) => {
   if (posts === null) {
     fetchPosts();
   }
-  // const { posts, fetchPosts } = props;
-  // fetchPosts();
-  // console.log(posts);
-
-  // postApi.createPost("Privet ", "Maks)");
-  // postApi.updatePost(13, "Kak ", "Dela?");
   return <Blog posts={posts} />;
 };
-
-// Index.getInitialProps = async ({ fetchPosts }) => {
-// const props: AxiosResponse<IPosts> = await postApi.getListAllPost();
-// return props.data;
-// dispatch
-// console.log(";lasdfkjfasd;");
-// postsActions.fetchPosts();
-// return {};
-// fetchPosts();
-// };
 
 const mapStateToProps = ({ postReducer }) => ({
   posts: postReducer.posts,

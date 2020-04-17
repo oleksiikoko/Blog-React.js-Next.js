@@ -38,9 +38,9 @@ const Actions = {
     };
   },
 
-  // fetchCreatePost: () => (dispatch) :void => {
-
-  // }
+  //   fetchCreatePost: (title, body) => (dispatch) :void => {
+  // postApi.createPost(title, body)
+  //   }
 
   fetchPosts: () => (dispatch): Promise<void> => {
     return postApi

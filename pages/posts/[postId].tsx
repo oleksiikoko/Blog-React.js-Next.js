@@ -9,13 +9,15 @@ import postActions from "store/posts/actions";
 import { IRetrievePost } from "interfaces";
 import UpdatePost from "components/UpdatePost";
 
-const Posts: React.FC<{
+interface IProps {
   post: IRetrievePost;
   fetchRetrievePosts: any;
   fetchUpdatePost: any;
   fetchDeletePost: any;
   fetchCreateComment: any;
-}> = ({
+}
+
+const Posts: React.FC<IProps> = ({
   post,
   fetchRetrievePosts,
   fetchUpdatePost,
@@ -24,14 +26,13 @@ const Posts: React.FC<{
 }) => {
   const router = useRouter();
 
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState<string>("");
 
   const postId: string | string[] = router.query.postId;
 
   if (!post || post.id !== Number(postId)) {
     fetchRetrievePosts(router.query.postId).then(() => {});
   }
-  // const { postId } = router.query;
 
   const updatePost = (postId, updateTitle, updateBody) => {
     fetchUpdatePost(postId, updateTitle, updateBody).then(() => {
