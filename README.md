@@ -1,1 +1,4 @@
-```npm run dev```
+```
+npm i @material-ui/core
+npm run dev
+```
