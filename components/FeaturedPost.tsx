@@ -1,58 +1,46 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
+import React from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
-const useStyles = makeStyles({
-  card: {
-    display: "flex",
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
-});
+import { IPost } from 'interfaces';
 
-export default function FeaturedPost(props) {
-  const classes = useStyles();
-  const { post } = props;
-
-  const router = useRouter();
-
-  return (
-    <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
-        <Card className={classes.card}>
-          <div className={classes.cardDetails}>
-            <CardContent>
-              <Typography component="h2" variant="h5">
-                {post.title}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {post.body}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="primary"
-                onClick={() => router.push(`/posts/${post.id}`)}
-              >
-                Continue reading...
-              </Typography>
-            </CardContent>
-          </div>
-          <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} />
-          </Hidden>
-        </Card>
-      </CardActionArea>
-    </Grid>
-  );
+interface IProps {
+    post: IPost;
 }
+
+const FeaturedPost: React.FC<IProps> = ({ post }) => {
+    const router = useRouter();
+    return (
+        <StyledPost onClick={() => router.push(`/posts/${post.id}`)}>
+            <StyledTitle>{post.title}</StyledTitle>
+            <StyledBody>{post.body}</StyledBody>
+        </StyledPost>
+    );
+};
+
+export default FeaturedPost;
+
+const StyledPost = styled.div`
+    height: 130px;
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: black;
+    margin: 20px;
+    cursor: pointer;
+`;
+
+const StyledTitle = styled.p`
+    text-align: center;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 20px;
+    color: black;
+`;
+
+const StyledBody = styled.p`
+    font-size: 14px;
+    margin: 20px;
+`;

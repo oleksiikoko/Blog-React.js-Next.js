@@ -1,33 +1,35 @@
-import React from "react";
+import React from 'react';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
-import values from "lodash/values";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import values from 'lodash/values';
 
-import Header from "./Header";
-import FeaturedPost from "./FeaturedPost";
-import Footer from "./Footer";
+import { Button, Header, Footer, FeaturedPost } from 'components';
 
-import { IPosts } from "interfaces";
+import { IPosts } from 'interfaces';
 
 const Blog: React.FC<{ posts: IPosts }> = ({ posts }) => {
-  return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Header title="Blog" />
-        <main>
-          <Grid container spacing={4}>
-            {values(posts).map((post) => (
-              <FeaturedPost key={post.id} post={post} />
-            ))}
-          </Grid>
-        </main>
-      </Container>
-      <Footer title="Footer" />
-    </>
-  );
+    const router = useRouter();
+    return (
+        <>
+            <Header title="Blog" />
+            <Button onClick={() => router.push('/new')} name="Add post" />
+            <StyledPostList>
+                {values(posts).map((post) => (
+                    <FeaturedPost key={post.id} post={post} />
+                ))}
+            </StyledPostList>
+
+            <Footer title="Footer" />
+        </>
+    );
 };
 
 export default Blog;
+
+const StyledPostList = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+`;

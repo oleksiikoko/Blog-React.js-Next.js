@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-const NewPost: React.FC = () => {
-  return (
-    <div className="new-post">
-      <input type="text" />
-      <input type="text" />
-      <button>Create post</button>
-    </div>
-  );
-};
+import NewPost from 'containers/NewPost';
+import { Header } from 'components';
 
-export default NewPost;
+const NewPostPage: React.FC = () => (
+    <>
+        <Header title="Blog" />
+        <NewPost />
+    </>
+);
+
+export default NewPostPage;

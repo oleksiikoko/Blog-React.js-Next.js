@@ -1,94 +1,93 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { useRouter } from "next/router";
-import { connect } from "react-redux";
-import values from "lodash/values";
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
+import values from 'lodash/values';
 
-import retrievePostActions from "store/retrievePost/actions";
-import postActions from "store/posts/actions";
-import { IRetrievePost } from "interfaces";
-import UpdatePost from "components/UpdatePost";
-import Button from "components/Button";
+import retrievePostActions from 'store/retrievePost/actions';
+import postActions from 'store/posts/actions';
+import { IRetrievePost } from 'interfaces';
+
+import { Comment, Input, Body, Title, Button, UpdatePost, Header } from 'components';
 
 interface IProps {
-  post: IRetrievePost;
-  fetchRetrievePosts: any;
-  fetchUpdatePost: any;
-  fetchDeletePost: any;
-  fetchCreateComment: any;
+    post: IRetrievePost;
+    fetchRetrievePosts: any;
+    fetchUpdatePost: any;
+    fetchDeletePost: any;
+    fetchCreateComment: any;
 }
 
 const Posts: React.FC<IProps> = ({
-  post,
-  fetchRetrievePosts,
-  fetchUpdatePost,
-  fetchDeletePost,
-  fetchCreateComment,
+    post,
+    fetchRetrievePosts,
+    fetchUpdatePost,
+    fetchDeletePost,
+    fetchCreateComment,
 }) => {
-  const router = useRouter();
+    const router = useRouter();
 
-  const [newComment, setNewComment] = useState<string>("");
+    const [newComment, setNewComment] = useState<string>('');
 
-  const postId: string | string[] = router.query.postId;
+    const postId: string | string[] = router.query.postId;
 
-  if (!post || post.id !== Number(postId)) {
-    fetchRetrievePosts(router.query.postId).then(() => {});
-  }
+    if (!post || post.id !== Number(postId)) {
+        fetchRetrievePosts(router.query.postId).then(() => {});
+    }
 
-  const updatePost = (postId, updateTitle, updateBody) => {
-    fetchUpdatePost(postId, updateTitle, updateBody).then(() => {
-      fetchRetrievePosts(router.query.postId);
-    });
-  };
+    const updatePost = (postId, updateTitle, updateBody) => {
+        fetchUpdatePost(postId, updateTitle, updateBody).then(() => {
+            fetchRetrievePosts(router.query.postId);
+        });
+    };
 
-  const deletePost = () => {
-    fetchDeletePost(postId).then(() => {
-      alert("Post deleted!");
-      router.push("/");
-    });
-  };
+    const deletePost = () => {
+        fetchDeletePost(postId).then(() => {
+            alert('Post deleted!');
+            router.push('/');
+        });
+    };
 
-  const changeComment = (event) => {
-    setNewComment(event.target.value);
-  };
+    const changeComment = (event) => {
+        setNewComment(event.target.value);
+    };
 
-  const addComment = () => {
-    fetchCreateComment(postId, newComment);
-  };
+    const addComment = () => {
+        fetchCreateComment(postId, newComment);
+    };
 
-  return (
-    post && (
-      <div className="post">
-        <div className="post__title">{post.title}</div>
-        <div className="post__body">{post.body}</div>
-        <UpdatePost
-          post={post}
-          sendUpdate={updatePost}
-          sendDelete={deletePost}
-        />
-        <div className="post__add-comment">
-          <input type="text" value={newComment} onChange={changeComment} />
-          {/* <button onClick={addComment}>Add comment</button> */}
-          <Button onClick={addComment.bind(this)} name="Add comment" />
-        </div>
-        <div className="post__comments">
-          {values(post.comments).map((comment) => (
-            <p>{comment.body}</p>
-          ))}
-        </div>
-      </div>
-    )
-  );
+    return (
+        <>
+            <Header title="Blog" />
+            {post && (
+                <div className="post">
+                    <Title text={post.title} />
+                    <Body text={post.body} />
+                    <UpdatePost post={post} sendUpdate={updatePost} sendDelete={deletePost} />
+                    <div className="post__add-comment">
+                        <label>Comment</label>
+                        <Input value={newComment} onChange={changeComment} />
+                        <Button onClick={addComment} name="Add comment" />
+                    </div>
+                    <div className="post__comments">
+                        {values(post.comments).map((comment) => {
+                            return <Comment key={comment.id} text={comment.body} />;
+                        })}
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
 const mapStateToProps = ({ retrievePostReducer }) => ({
-  post: retrievePostReducer.post,
+    post: retrievePostReducer.post,
 });
 const mapDispatchToProps = {
-  fetchRetrievePosts: retrievePostActions.fetchRetrievePosts,
-  fetchUpdatePost: postActions.fetchUpdatePost,
-  fetchDeletePost: postActions.fetchDeletePost,
-  fetchCreateComment: retrievePostActions.fetchCreateComment,
+    fetchRetrievePosts: retrievePostActions.fetchRetrievePosts,
+    fetchUpdatePost: postActions.fetchUpdatePost,
+    fetchDeletePost: postActions.fetchDeletePost,
+    fetchCreateComment: retrievePostActions.fetchCreateComment,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

@@ -1,0 +1,11 @@
+export { default as UpdatePost } from './UpdatePost';
+export { default as Blog } from './Blog';
+export { default as Body } from './Body';
+export { default as Button } from './Button';
+export { default as Comment } from './Comment';
+export { default as FeaturedPost } from './FeaturedPost';
+export { default as Footer } from './Footer';
+export { default as Header } from './Header';
+export { default as Input } from './Input';
+export { default as Title } from './Title';
+export { default as NewPost } from './NewPost';

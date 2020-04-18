@@ -190,6 +190,11 @@ const initialState = {
 };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_1__["CREATE_POST"]:
+      return {
+        posts: [...lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts), action.payload]
+      };
+
     case _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_POST"]:
       return {
         posts: lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts).map(post => {

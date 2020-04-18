@@ -23,15 +23,23 @@ const Actions = {
   fetchRetrievePosts: (postId) => (dispatch): Promise<void> => {
     return postApi
       .getRetrievePost(postId)
-      .then(({ data }) => {
+      .then((response) => {
+        const { data, status } = response;
+
+        if (status !== 200) {
+          return Promise.reject();
+        }
+
         dispatch(Actions.setRetrievePost(<IRetrievePost>data));
         return Promise.resolve();
       })
       .catch((err) => console.log(err));
   },
   fetchCreateComment: (postId, body) => (dispatch): void => {
+    console.log(postId);
     commentApi.createComment(postId, body).then((response) => {
-      const { data } = response;
+      const { data, status } = response;
+      console.log(status);
       dispatch(Actions.addComment(<IComment>data));
     });
   },

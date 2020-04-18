@@ -8087,9 +8087,11 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postReducer", function() { return postReducer; });
-/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/values */ "./node_modules/lodash/values.js");
-/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_values__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./store/posts/types.ts");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/values */ "./node_modules/lodash/values.js");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_values__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./store/posts/types.ts");
+
 
 
 var initialState = {
@@ -8100,9 +8102,14 @@ var postReducer = function postReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_POST"]:
+    case _types__WEBPACK_IMPORTED_MODULE_2__["CREATE_POST"]:
       return {
-        posts: lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts).map(function (post) {
+        posts: [].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(lodash_values__WEBPACK_IMPORTED_MODULE_1___default()(state.posts)), [action.payload])
+      };
+
+    case _types__WEBPACK_IMPORTED_MODULE_2__["UPDATE_POST"]:
+      return {
+        posts: lodash_values__WEBPACK_IMPORTED_MODULE_1___default()(state.posts).map(function (post) {
           if (post.id !== Number(action.payload.id)) {
             return action.payload;
           }
@@ -8111,14 +8118,14 @@ var postReducer = function postReducer() {
         })
       };
 
-    case _types__WEBPACK_IMPORTED_MODULE_1__["DELETE_POST"]:
+    case _types__WEBPACK_IMPORTED_MODULE_2__["DELETE_POST"]:
       return {
-        posts: lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.posts).filter(function (post) {
+        posts: lodash_values__WEBPACK_IMPORTED_MODULE_1___default()(state.posts).filter(function (post) {
           return post.id !== Number(action.payload);
         })
       };
 
-    case _types__WEBPACK_IMPORTED_MODULE_1__["SET_POSTS"]:
+    case _types__WEBPACK_IMPORTED_MODULE_2__["SET_POSTS"]:
       return {
         posts: action.payload
       };
