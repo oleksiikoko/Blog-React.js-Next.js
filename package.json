@@ -17,10 +17,9 @@
     "@babel/preset-flow": "^7.9.0",
     "@material-ui/core": "^4.9.10",
     "@types/axios": "^0.14.0",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.150",
     "@types/next": "^9.0.0",
     "@types/next-redux-wrapper": "^3.0.0",
-    "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-redux": "^7.1.7",
     "@types/redux": "^3.6.0",
@@ -30,16 +29,20 @@
     "flow": "^0.2.3",
     "flow-bin": "^0.123.0",
     "lodash": "^4.17.15",
+    "next": "^9.3.5",
     "next-redux-wrapper": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
+    "react-thunk": "^1.0.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@types/material-ui": "^0.21.7",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.0",
+    "@types/react": "^16.9.34",
     "@types/react-tap-event-plugin": "0.0.30",
     "typescript": "^3.8.3"
   }

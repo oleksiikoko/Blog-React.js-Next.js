@@ -8,6 +8,7 @@ import retrievePostActions from "store/retrievePost/actions";
 import postActions from "store/posts/actions";
 import { IRetrievePost } from "interfaces";
 import UpdatePost from "components/UpdatePost";
+import Button from "components/Button";
 
 interface IProps {
   post: IRetrievePost;
@@ -67,7 +68,8 @@ const Posts: React.FC<IProps> = ({
         />
         <div className="post__add-comment">
           <input type="text" value={newComment} onChange={changeComment} />
-          <button onClick={addComment}>Add comment</button>
+          {/* <button onClick={addComment}>Add comment</button> */}
+          <Button onClick={addComment.bind(this)} name="Add comment" />
         </div>
         <div className="post__comments">
           {values(post.comments).map((comment) => (
